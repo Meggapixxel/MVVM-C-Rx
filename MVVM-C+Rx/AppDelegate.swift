@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let apiService = ApiService(baseUrl: URL(string: "")!)
         let loginService = SignInService(apiSevrice: apiService)
-        let loginControllerViewModel = SignInController.ViewModel(loginService)
-        let loginController = SignInController.make(with: loginControllerViewModel)
+        let loginControllerViewModel = SignInVC.ViewModel(loginService)
+        let loginController = SignInVC.make(with: loginControllerViewModel)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginController

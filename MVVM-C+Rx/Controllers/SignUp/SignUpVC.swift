@@ -1,5 +1,5 @@
 //
-//  SignInController.swift
+//  SignUpVC.swift
 //  MVVM-C+Rx
 //
 //  Created by Vadim Zhydenko on 06.03.2020.
@@ -10,48 +10,49 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SignInController: UIViewController, P_ViewController {
+class SignUpVC: UIViewController, P_ViewController {
     
-    static var initiableResource: InitializableSource { .storyboard(storyboard: UIStoryboard(name: "Main", bundle: nil)) }
+    static var initiableResource: InitializableSource { .xib }
     
     // MARK: - P_BaseRx
     let disposeBag = DisposeBag()
     
     // MARK: - UI
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var passwordTextfield: UITextField!
-    @IBOutlet private weak var emailTextfield: UITextField!
-    @IBOutlet private weak var signInButton: UIButton!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var passwordCofirmTextField: UITextField!
+    @IBOutlet private weak var signUpButton: UIButton!
 
     // MARK: - P_Bindable
     var viewModel: ViewModel!
     
     func bindViewModel() {
-        emailTextfield.rx.text.orEmpty
+        emailTextField.rx.text.orEmpty
             .bind(to: viewModel.input.email)
             .disposed(by: disposeBag)
         
-        passwordTextfield.rx.text.orEmpty
+        passwordTextField.rx.text.orEmpty
             .bind(to: viewModel.input.password)
             .disposed(by: disposeBag)
         
-        signInButton.rx.tap
-            .bind(to: viewModel.input.signInDidTap)
+        signUpButton.rx.tap
+            .bind(to: viewModel.input.signUpDidTap)
             .disposed(by: disposeBag)
         
-        weak var weakSelf: SignInController! = self
+        weak var weakSelf: SignUpVC! = self
         viewModel.output.errors
             .drive(onNext: { weakSelf.presentError($0) } )
             .disposed(by: disposeBag)
         
-        viewModel.output.signInEnabled
-            .drive(signInButton.rx.isEnabled)
+        viewModel.output.signUpEnabled
+            .drive(signUpButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
     
 }
 
-extension SignInController: P_KeyboardViewController {
+extension SignUpVC: P_KeyboardViewController {
     
     var isKeyboardObserving: Bool { true }
     
@@ -65,17 +66,18 @@ extension SignInController: P_KeyboardViewController {
     
 }
 
-extension SignInController {
+extension SignUpVC {
     
     class ViewModel: P_ErrorViewModel {
         
         struct Input {
             let email = BehaviorRelay<String>(value: "")
             let password = BehaviorRelay<String>(value: "")
-            let signInDidTap = PublishSubject<Void>()
+            let passwordConfirm = BehaviorRelay<String>(value: "")
+            let signUpDidTap = PublishSubject<Void>()
         }
         struct Output {
-            let signInEnabled: Driver<Bool>
+            let signUpEnabled: Driver<Bool>
             let errors: Driver<Error>
         }
         
@@ -100,7 +102,7 @@ extension SignInController {
         }
         
         // MARK: - Init and deinit
-        init(_ loginService: P_SignInService) {
+        init(_ signUpService: P_SignUpService) {
             
 //            input = Input(
 //                email: emailSubject.asObservable(),
@@ -109,17 +111,18 @@ extension SignInController {
 //            )
             
             output = Output(
-                signInEnabled: Driver.combineLatest(
+                signUpEnabled: Driver.combineLatest(
                     input.email.asDriver().map { !$0.isEmpty },
-                    input.password.asDriver().map { !$0.isEmpty }
-                ) { $0 && $1 },
+                    input.password.asDriver().map { !$0.isEmpty },
+                    Driver.combineLatest(input.password.asDriver(), input.passwordConfirm.asDriver()) { $0 == $1 }
+                ) { $0 && $1 && $2 },
                 errors: errorsSubject.asDriver(onErrorJustReturn: NSError(domain: "", code: 0, userInfo: nil))
             )
             
             weak var weakSelf: ViewModel! = self
-            input.signInDidTap
+            input.signUpDidTap
                 .withLatestFrom(credentialsObservable)
-                .flatMapLatest { loginService.signIn(with: $0) }
+                .flatMapLatest { signUpService.signUp(with: $0) }
                 .subscribe(
                     onNext: { _ in print("OK") },
                     onError: { weakSelf.errorsSubject.onNext($0) }

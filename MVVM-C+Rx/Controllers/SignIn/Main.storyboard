@@ -10,7 +10,7 @@
         <!--LoginController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SignInController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="SignInController" customModule="MVVM_C_Rx" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="SignInVC" customModule="MVVM_C_Rx" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gfd-yT-zbR">
-                                                <rect key="frame" x="20" y="248.5" width="335" height="170"/>
+                                                <rect key="frame" x="20" y="241.5" width="335" height="184"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In form" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owV-yD-Zh7">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
@@ -41,18 +41,32 @@
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAm-JX-1Zk">
-                                                        <rect key="frame" x="0.0" y="140" width="335" height="30"/>
+                                                        <rect key="frame" x="0.0" y="140" width="335" height="44"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="mnG-S0-aOh"/>
+                                                        </constraints>
                                                         <state key="normal" title="Sign In"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fl-Xe-F6K">
+                                                <rect key="frame" x="20" y="607" width="335" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="pWu-Vz-xbg"/>
+                                                </constraints>
+                                                <state key="normal" title="Sign up"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="gfd-yT-zbR" firstAttribute="leading" secondItem="zXc-nx-cUB" secondAttribute="leading" constant="20" id="5bU-Ar-Ht8"/>
                                             <constraint firstItem="gfd-yT-zbR" firstAttribute="centerY" secondItem="zXc-nx-cUB" secondAttribute="centerY" id="6hJ-sh-Wx5"/>
+                                            <constraint firstAttribute="trailing" secondItem="5fl-Xe-F6K" secondAttribute="trailing" constant="20" id="SQ1-SE-nin"/>
+                                            <constraint firstItem="5fl-Xe-F6K" firstAttribute="leading" secondItem="zXc-nx-cUB" secondAttribute="leading" constant="20" id="omx-2F-w2I"/>
                                             <constraint firstAttribute="trailing" secondItem="gfd-yT-zbR" secondAttribute="trailing" constant="20" id="pgz-HS-WuC"/>
+                                            <constraint firstItem="chG-uS-xsM" firstAttribute="bottom" secondItem="5fl-Xe-F6K" secondAttribute="bottom" constant="16" id="ztH-yI-rHR"/>
                                         </constraints>
+                                        <viewLayoutGuide key="safeArea" id="chG-uS-xsM"/>
                                     </view>
                                 </subviews>
                                 <constraints>

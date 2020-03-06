@@ -16,7 +16,7 @@
 		BC823C7D2412538300A6C0A0 /* P_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C782412538300A6C0A0 /* P_ViewModel.swift */; };
 		BC823C7E2412538300A6C0A0 /* P_BaseRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C792412538300A6C0A0 /* P_BaseRx.swift */; };
 		BC823C7F2412538300A6C0A0 /* P_Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C7A2412538300A6C0A0 /* P_Bindable.swift */; };
-		BC823C822412542F00A6C0A0 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C812412542F00A6C0A0 /* SignInController.swift */; };
+		BC823C822412542F00A6C0A0 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C812412542F00A6C0A0 /* SignInVC.swift */; };
 		BC823C842412545B00A6C0A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C832412545A00A6C0A0 /* User.swift */; };
 		BC823C882412547800A6C0A0 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C872412547800A6C0A0 /* UIViewController+Extensions.swift */; };
 		BC823C8B2412548400A6C0A0 /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C8A2412548400A6C0A0 /* SignInService.swift */; };
@@ -28,6 +28,9 @@
 		BC823C992412927800A6C0A0 /* P_ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823C982412927800A6C0A0 /* P_ApiService.swift */; };
 		BC823CA22412966C00A6C0A0 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823CA12412966C00A6C0A0 /* ApiError.swift */; };
 		BC823CA924129D1400A6C0A0 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823CA824129D1400A6C0A0 /* ApiService.swift */; };
+		BC823CAB2412A8E700A6C0A0 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823CAA2412A8E700A6C0A0 /* SignUpService.swift */; };
+		BC823CAD2412A94C00A6C0A0 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823CAC2412A94C00A6C0A0 /* SignUpVC.swift */; };
+		BC823CB12412AA5C00A6C0A0 /* SignUpVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC823CB02412AA5C00A6C0A0 /* SignUpVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +47,7 @@
 		BC823C782412538300A6C0A0 /* P_ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P_ViewModel.swift; sourceTree = "<group>"; };
 		BC823C792412538300A6C0A0 /* P_BaseRx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P_BaseRx.swift; sourceTree = "<group>"; };
 		BC823C7A2412538300A6C0A0 /* P_Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P_Bindable.swift; sourceTree = "<group>"; };
-		BC823C812412542F00A6C0A0 /* SignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		BC823C812412542F00A6C0A0 /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		BC823C832412545A00A6C0A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC823C872412547800A6C0A0 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		BC823C8A2412548400A6C0A0 /* SignInService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
@@ -56,6 +59,9 @@
 		BC823C982412927800A6C0A0 /* P_ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P_ApiService.swift; sourceTree = "<group>"; };
 		BC823CA12412966C00A6C0A0 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		BC823CA824129D1400A6C0A0 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		BC823CAA2412A8E700A6C0A0 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
+		BC823CAC2412A94C00A6C0A0 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		BC823CB02412AA5C00A6C0A0 /* SignUpVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +105,6 @@
 				BC823C862412547800A6C0A0 /* Extensions */,
 				BC823C752412538300A6C0A0 /* Protocols */,
 				BC823C6A2412537000A6C0A0 /* Assets.xcassets */,
-				BC823C8C2412560200A6C0A0 /* Main.storyboard */,
 				BC823C6C2412537000A6C0A0 /* LaunchScreen.storyboard */,
 				BC823C6F2412537000A6C0A0 /* Info.plist */,
 			);
@@ -121,7 +126,8 @@
 		BC823C802412542F00A6C0A0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BC823C812412542F00A6C0A0 /* SignInController.swift */,
+				BC823CAF2412AA4800A6C0A0 /* SignUp */,
+				BC823CAE2412AA3900A6C0A0 /* SignIn */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -147,6 +153,7 @@
 			children = (
 				BC823CA32412967800A6C0A0 /* API */,
 				BC823C8A2412548400A6C0A0 /* SignInService.swift */,
+				BC823CAA2412A8E700A6C0A0 /* SignUpService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -178,6 +185,24 @@
 				BC823CA12412966C00A6C0A0 /* ApiError.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		BC823CAE2412AA3900A6C0A0 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				BC823C812412542F00A6C0A0 /* SignInVC.swift */,
+				BC823C8C2412560200A6C0A0 /* Main.storyboard */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		BC823CAF2412AA4800A6C0A0 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				BC823CAC2412A94C00A6C0A0 /* SignUpVC.swift */,
+				BC823CB02412AA5C00A6C0A0 /* SignUpVC.xib */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		BFB079220CF30AD3CFDEC405 /* Pods */ = {
@@ -257,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC823CB12412AA5C00A6C0A0 /* SignUpVC.xib in Resources */,
 				BC823C8D2412560200A6C0A0 /* Main.storyboard in Resources */,
 				BC823C6E2412537000A6C0A0 /* LaunchScreen.storyboard in Resources */,
 				BC823C6B2412537000A6C0A0 /* Assets.xcassets in Resources */,
@@ -316,9 +342,11 @@
 				BC823CA22412966C00A6C0A0 /* ApiError.swift in Sources */,
 				BC823C622412536F00A6C0A0 /* AppDelegate.swift in Sources */,
 				BC823C7F2412538300A6C0A0 /* P_Bindable.swift in Sources */,
-				BC823C822412542F00A6C0A0 /* SignInController.swift in Sources */,
+				BC823C822412542F00A6C0A0 /* SignInVC.swift in Sources */,
 				BC823C882412547800A6C0A0 /* UIViewController+Extensions.swift in Sources */,
 				BC823C8B2412548400A6C0A0 /* SignInService.swift in Sources */,
+				BC823CAD2412A94C00A6C0A0 /* SignUpVC.swift in Sources */,
+				BC823CAB2412A8E700A6C0A0 /* SignUpService.swift in Sources */,
 				BC823C9024125C4B00A6C0A0 /* P_ErrorViewModel.swift in Sources */,
 				BC823C842412545B00A6C0A0 /* User.swift in Sources */,
 				BC823C922412826A00A6C0A0 /* P_KeyboardViewController.swift in Sources */,
