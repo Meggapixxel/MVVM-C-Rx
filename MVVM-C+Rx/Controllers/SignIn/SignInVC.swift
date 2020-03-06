@@ -22,6 +22,7 @@ class SignInVC: UIViewController, P_ViewController {
     @IBOutlet private weak var passwordTextfield: UITextField!
     @IBOutlet private weak var emailTextfield: UITextField!
     @IBOutlet private weak var signInButton: UIButton!
+    @IBOutlet private weak var signUpButton: UIButton!
 
     // MARK: - P_Bindable
     var viewModel: ViewModel!
@@ -37,6 +38,10 @@ class SignInVC: UIViewController, P_ViewController {
         
         signInButton.rx.tap
             .bind(to: viewModel.input.signInDidTap)
+            .disposed(by: disposeBag)
+        
+        signUpButton.rx.tap
+            .bind(to: viewModel.input.signUpDidTap)
             .disposed(by: disposeBag)
         
         weak var weakSelf: SignInVC! = self
@@ -73,6 +78,7 @@ extension SignInVC {
             let email = BehaviorRelay<String>(value: "")
             let password = BehaviorRelay<String>(value: "")
             let signInDidTap = PublishSubject<Void>()
+            let signUpDidTap = PublishSubject<Void>()
         }
         struct Output {
             let signInEnabled: Driver<Bool>
@@ -100,7 +106,7 @@ extension SignInVC {
         }
         
         // MARK: - Init and deinit
-        init(_ signInService: P_SignInService) {
+        init(_ signInService: P_SignInService, navigateSignUp: @escaping () -> ()) {
             
 //            input = Input(
 //                email: emailSubject.asObservable(),
@@ -115,6 +121,8 @@ extension SignInVC {
                 ) { $0 && $1 },
                 errors: errorsSubject.asDriver(onErrorJustReturn: NSError(domain: "", code: 0, userInfo: nil))
             )
+            
+            input.signUpDidTap.bind(onNext: navigateSignUp).disposed(by: disposeBag)
             
             weak var weakSelf: ViewModel! = self
             input.signInDidTap

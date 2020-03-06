@@ -12,17 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    private let navigationController = UINavigationController()
+    private var appCoordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let apiService = ApiService(baseUrl: URL(string: "")!)
-        let loginService = SignInService(apiSevrice: apiService)
-        let loginControllerViewModel = SignInVC.ViewModel(loginService)
-        let loginController = SignInVC.make(with: loginControllerViewModel)
-        
+        appCoordinator = AppCoordinator(navigationController: navigationController, parent: nil)
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = loginController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        appCoordinator.start()
         
         return true
     }

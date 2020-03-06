@@ -31,6 +31,11 @@
 		BC823CAB2412A8E700A6C0A0 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823CAA2412A8E700A6C0A0 /* SignUpService.swift */; };
 		BC823CAD2412A94C00A6C0A0 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC823CAC2412A94C00A6C0A0 /* SignUpVC.swift */; };
 		BC823CB12412AA5C00A6C0A0 /* SignUpVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC823CB02412AA5C00A6C0A0 /* SignUpVC.xib */; };
+		BC9C4DAD2412AFD5007A1BAD /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C4DAC2412AFD5007A1BAD /* SignUpCoordinator.swift */; };
+		BC9C4DAF2412AFDF007A1BAD /* SignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C4DAE2412AFDF007A1BAD /* SignInCoordinator.swift */; };
+		BC9C4DB12412B00D007A1BAD /* P_Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C4DB02412B00D007A1BAD /* P_Coordinator.swift */; };
+		BC9C4DB32412B09B007A1BAD /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C4DB22412B09B007A1BAD /* BaseCoordinator.swift */; };
+		BC9C4DB52412B306007A1BAD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C4DB42412B306007A1BAD /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +67,11 @@
 		BC823CAA2412A8E700A6C0A0 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		BC823CAC2412A94C00A6C0A0 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		BC823CB02412AA5C00A6C0A0 /* SignUpVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpVC.xib; sourceTree = "<group>"; };
+		BC9C4DAC2412AFD5007A1BAD /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
+		BC9C4DAE2412AFDF007A1BAD /* SignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCoordinator.swift; sourceTree = "<group>"; };
+		BC9C4DB02412B00D007A1BAD /* P_Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P_Coordinator.swift; sourceTree = "<group>"; };
+		BC9C4DB22412B09B007A1BAD /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		BC9C4DB42412B306007A1BAD /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,7 @@
 				BC823C962412841200A6C0A0 /* SwizzlingManager.swift */,
 				BC823C612412536F00A6C0A0 /* AppDelegate.swift */,
 				BC823C892412548400A6C0A0 /* Services */,
+				BC9C4DAB2412AFB7007A1BAD /* Coordinators */,
 				BC823C802412542F00A6C0A0 /* Controllers */,
 				BC823C852412545E00A6C0A0 /* Models */,
 				BC823C862412547800A6C0A0 /* Extensions */,
@@ -119,6 +130,7 @@
 				BC823C932412827100A6C0A0 /* P_KeyboardObservable.swift */,
 				BC823C952412827F00A6C0A0 /* ViewModel */,
 				BC823C8E24125C3600A6C0A0 /* UIViewController */,
+				BC9C4DB02412B00D007A1BAD /* P_Coordinator.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -203,6 +215,17 @@
 				BC823CB02412AA5C00A6C0A0 /* SignUpVC.xib */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		BC9C4DAB2412AFB7007A1BAD /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				BC9C4DB22412B09B007A1BAD /* BaseCoordinator.swift */,
+				BC9C4DB42412B306007A1BAD /* AppCoordinator.swift */,
+				BC9C4DAE2412AFDF007A1BAD /* SignInCoordinator.swift */,
+				BC9C4DAC2412AFD5007A1BAD /* SignUpCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		BFB079220CF30AD3CFDEC405 /* Pods */ = {
@@ -342,6 +365,7 @@
 				BC823CA22412966C00A6C0A0 /* ApiError.swift in Sources */,
 				BC823C622412536F00A6C0A0 /* AppDelegate.swift in Sources */,
 				BC823C7F2412538300A6C0A0 /* P_Bindable.swift in Sources */,
+				BC9C4DAF2412AFDF007A1BAD /* SignInCoordinator.swift in Sources */,
 				BC823C822412542F00A6C0A0 /* SignInVC.swift in Sources */,
 				BC823C882412547800A6C0A0 /* UIViewController+Extensions.swift in Sources */,
 				BC823C8B2412548400A6C0A0 /* SignInService.swift in Sources */,
@@ -349,11 +373,15 @@
 				BC823CAB2412A8E700A6C0A0 /* SignUpService.swift in Sources */,
 				BC823C9024125C4B00A6C0A0 /* P_ErrorViewModel.swift in Sources */,
 				BC823C842412545B00A6C0A0 /* User.swift in Sources */,
+				BC9C4DB52412B306007A1BAD /* AppCoordinator.swift in Sources */,
 				BC823C922412826A00A6C0A0 /* P_KeyboardViewController.swift in Sources */,
 				BC823C972412841200A6C0A0 /* SwizzlingManager.swift in Sources */,
 				BC823C7D2412538300A6C0A0 /* P_ViewModel.swift in Sources */,
+				BC9C4DB12412B00D007A1BAD /* P_Coordinator.swift in Sources */,
+				BC9C4DB32412B09B007A1BAD /* BaseCoordinator.swift in Sources */,
 				BC823C942412827100A6C0A0 /* P_KeyboardObservable.swift in Sources */,
 				BC823CA924129D1400A6C0A0 /* ApiService.swift in Sources */,
+				BC9C4DAD2412AFD5007A1BAD /* SignUpCoordinator.swift in Sources */,
 				BC823C7B2412538300A6C0A0 /* P_ViewController.swift in Sources */,
 				BC823C992412927800A6C0A0 /* P_ApiService.swift in Sources */,
 				BC823C7C2412538300A6C0A0 /* P_InitializableViewController.swift in Sources */,
