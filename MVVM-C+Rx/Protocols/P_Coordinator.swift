@@ -10,15 +10,11 @@ import UIKit
 
 protocol P_Coordinator: class, P_BaseRx {
     
-//    init(navigationController: UINavigationController, parent: P_Coordinator?)
-    
-    var parent: P_Coordinator? { get set }
+    var parent: P_Coordinator? { get }
     var childCoordinators: [P_Coordinator] { get set }
     var navigationController: UINavigationController! { get }
         
     func start()
-//    func childCoordinatorStart(_ coordinator: P_Coordinator)
-//    func childCoordinatorDidFinish(_ coordinator: P_Coordinator)
     
     func onDismiss(_ completion: @escaping () -> ())
     func dismiss()
@@ -33,7 +29,6 @@ extension P_Coordinator {
     
     func childCoordinatorStart(_ coordinator: P_Coordinator) {
         childCoordinators.append(coordinator)
-        coordinator.parent = self
         
         weak var weakParent: P_Coordinator! = self
         weak var weakChild: P_Coordinator! = coordinator
@@ -47,21 +42,6 @@ extension P_Coordinator {
         coordinator.dismissChildCoordinators()
         childCoordinators.remove(at: index)
     }
-    
-    @discardableResult
-    func loadAsRootFirstChild(_ child: P_Coordinator) -> P_Coordinator {
-        let root = rootCoordinator
-        root.dismissChildCoordinators()
-        root.childCoordinatorStart(child)
-        return child
-    }
-//    func loadAsRootFirstChild<T: P_Coordinator>(_ childClass: T.Type) -> T {
-//        let root = rootCoordinator
-//        let child = T(navigationController: root.navigationController, parent: root)
-//        root.childCoordinators.forEach { recursiveDismissChildCoordinators($0) }
-//        root.childCoordinatorStart(child)
-//        return child
-//    }
     
     var rootCoordinator: P_Coordinator { recursiveRootCoordinator(self) }
     private func recursiveRootCoordinator(_ coordinator: P_Coordinator) -> P_Coordinator {

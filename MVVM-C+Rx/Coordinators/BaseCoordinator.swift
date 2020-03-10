@@ -19,7 +19,7 @@ class BaseCoordinator: NSObject, P_Coordinator {
     
     private static var prefix: String { "Coordinator" }
     
-    weak var parent: P_Coordinator?
+    private(set) weak var parent: P_Coordinator?
     var childCoordinators = [P_Coordinator]()
     private(set) weak var navigationController: UINavigationController!
     let disposeBag = DisposeBag()
