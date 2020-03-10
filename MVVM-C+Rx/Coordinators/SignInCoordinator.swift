@@ -24,7 +24,7 @@ class SignInCoordinator: BaseCoordinator {
         
         weak var weakSelf: SignInCoordinator! = self
         weak var weakRootCoordinator: P_Coordinator! = self.rootCoordinator
-        let viewModel = SignInVC.SignUpVM(
+        let viewModel = SignInVM(
             signInService,
             navigateSignUp: { weakSelf.coodinators.signUp.start() },
             navigateMain: {

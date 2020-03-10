@@ -8,9 +8,9 @@ struct ProtocolPrivate<T> {
 
 protocol P_Bindable {
     
-    associatedtype SignUpVM: P_ViewModel
+    associatedtype ViewModel: P_ViewModel
 
-    var viewModel: SignUpVM! { get set }
+    var viewModel: ViewModel! { get set }
     
     /// Configurates controller with specified P_ViewModel subclass
     ///
