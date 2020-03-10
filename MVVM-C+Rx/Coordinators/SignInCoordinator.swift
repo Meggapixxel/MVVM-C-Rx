@@ -8,28 +8,31 @@
 
 import Foundation
 
-extension P_Coordinator {
+extension Coordinators {
     
-    @discardableResult
-    func loadSignInCoordinator() -> P_Coordinator {
-        let coordinator = SignInCoordinator(navigationController: navigationController, parent: self)
-        childCoordinatorStart(coordinator)
-        return coordinator
-    }
+    var signIn: P_Coordinator { SignInCoordinator(navigationController: base.navigationController, parent: base) }
     
 }
 
 class SignInCoordinator: BaseCoordinator {
     
     override func start() {
+        super.start()
+        
         let apiService = ApiService(baseUrl: URL(string: "https://googl.com")!)
         let signInService = SignInService(apiSevrice: apiService)
         
         weak var weakSelf: SignInCoordinator! = self
-        let viewModel = SignInVC.ViewModel(
+        weak var weakRootCoordinator: P_Coordinator! = self.rootCoordinator
+        let viewModel = SignInVC.SignUpVM(
             signInService,
-            navigateSignUp: { weakSelf.loadSignUpCoordinator() }
+            navigateSignUp: { weakSelf.coodinators.signUp.start() },
+            navigateMain: {
+                weakRootCoordinator.dismissChildCoordinators()
+                weakRootCoordinator.coodinators.mainCoordinator.start()
+            }
         )
+        
         let vc = SignInVC.make(with: viewModel)
         present(viewController: vc, type: .root)
     }

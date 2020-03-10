@@ -11,7 +11,7 @@ import Foundation
 class AppCoordinator: BaseCoordinator {
     
     override func start() {
-        loadSignInCoordinator()
+        coodinators.signIn.start()
     }
     
 }

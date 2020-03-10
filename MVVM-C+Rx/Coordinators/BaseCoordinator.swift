@@ -17,8 +17,10 @@ enum PresentationType {
 
 class BaseCoordinator: NSObject, P_Coordinator {
     
-    private(set) weak var parent: P_Coordinator?
-    private(set) var childCoordinators = [P_Coordinator]()
+    private static var prefix: String { "Coordinator" }
+    
+    weak var parent: P_Coordinator?
+    var childCoordinators = [P_Coordinator]()
     private(set) weak var navigationController: UINavigationController!
     let disposeBag = DisposeBag()
     
@@ -28,31 +30,25 @@ class BaseCoordinator: NSObject, P_Coordinator {
     // MARK: - Output
     private lazy var dismissOutput = dismissInput.take(1).ignoreElements()
     
+    #if DEBUG
+    deinit {
+        print("\(BaseCoordinator.prefix) | \(String(describing: type(of: self)))", #function)
+    }
+    #endif
+    
     required init(navigationController: UINavigationController, parent: P_Coordinator?) {
         self.navigationController = navigationController
         self.parent = parent
+        
         super.init()
+        
+        #if DEBUG
+        print("\(BaseCoordinator.prefix) | \(String(describing: type(of: self)))", #function)
+        #endif
     }
     
     func start() {
-        fatalError("\(#function) not implemented")
-    }
-    
-    func childCoordinatorStart(_ coordinator: P_Coordinator) {
-        childCoordinators.append(coordinator)
-        coordinator.start()
-        
-        weak var weakParent: P_Coordinator! = self
-        weak var weakChild: P_Coordinator! = coordinator
-        coordinator.onDismiss {
-            weakParent.childCoordinatorDidFinish(weakChild)
-        }
-    }
-
-    func childCoordinatorDidFinish(_ coordinator: P_Coordinator) {
-        guard let index = childCoordinators.firstIndex(where: { $0 === coordinator } ) else { return }
-        coordinator.dismissChildCoordinators()
-        childCoordinators.remove(at: index)
+        parent?.childCoordinatorStart(self)
     }
     
     func onDismiss(_ completion: @escaping () -> ()) {

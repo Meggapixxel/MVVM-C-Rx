@@ -10,7 +10,7 @@ extension P_ViewController {
     ///
     /// - Parameter viewModel: View model object
     /// - Returns: View controller of concrete type
-    static func make(with viewModel: ViewModel) -> Self {
+    static func make(with viewModel: SignUpVM) -> Self {
         var vc = Self.newInstance
         vc.viewModel = viewModel
         vc.loadViewIfNeeded()

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SignInVC: UIViewController, P_ViewController {
+final class SignInVC: UIViewController, P_ViewController {
     
     static var initiableResource: InitializableSource { .storyboard(storyboard: UIStoryboard(name: "Main", bundle: nil)) }
     
@@ -24,8 +24,22 @@ class SignInVC: UIViewController, P_ViewController {
     @IBOutlet private weak var signInButton: UIButton!
     @IBOutlet private weak var signUpButton: UIButton!
 
+    #if DEBUG
+    deinit {
+        print("ViewController | \(String(describing: type(of: self)))", #function)
+    }
+    #endif
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        #if DEBUG
+        print("ViewController | \(String(describing: type(of: self)))", #function)
+        #endif
+    }
+    
     // MARK: - P_Bindable
-    var viewModel: ViewModel!
+    var viewModel: SignInVM!
     
     func bindViewModel() {
         emailTextfield.rx.text.orEmpty
@@ -66,78 +80,6 @@ extension SignInVC: P_KeyboardViewController {
     
     func keyboardWillHide(duration: TimeInterval, options: UIView.AnimationOptions) {
         scrollView.contentInset.bottom = 0
-    }
-    
-}
-
-extension SignInVC {
-    
-    class ViewModel: P_ErrorViewModel {
-        
-        struct Input {
-            let email = BehaviorRelay<String>(value: "")
-            let password = BehaviorRelay<String>(value: "")
-            let signInDidTap = PublishSubject<Void>()
-            let signUpDidTap = PublishSubject<Void>()
-        }
-        struct Output {
-            let signInEnabled: Driver<Bool>
-            let errors: Driver<Error>
-        }
-        
-        // MARK: - Public properties
-        let input = Input()
-        let output: Output
-        
-        let errorsSubject = PublishSubject<Error>()
-        let disposeBag = DisposeBag()
-        
-        // MARK: - Private properties
-//        private let emailSubject = BehaviorRelay<String>(value: "")
-//        private let passwordSubject = BehaviorRelay<String>(value: "")
-//        private let signInDidTapSubject = PublishSubject<Void>()
-//        private let loginResultSubject = PublishSubject<User>()
-        private var credentialsObservable: Observable<Credentials> {
-            Observable.combineLatest(
-                input.email.asObservable(),
-                input.password.asObservable(),
-                resultSelector: Credentials.init
-            )
-        }
-        
-        // MARK: - Init and deinit
-        init(_ signInService: P_SignInService, navigateSignUp: @escaping () -> ()) {
-            
-//            input = Input(
-//                email: emailSubject.asObservable(),
-//                password: passwordSubject.asObservable(),
-//                signInDidTap: signInDidTapSubject.asObserver()
-//            )
-            
-            output = Output(
-                signInEnabled: Driver.combineLatest(
-                    input.email.asDriver().map { !$0.isEmpty },
-                    input.password.asDriver().map { !$0.isEmpty }
-                ) { $0 && $1 },
-                errors: errorsSubject.asDriver(onErrorJustReturn: NSError(domain: "", code: 0, userInfo: nil))
-            )
-            
-            input.signUpDidTap.bind(onNext: navigateSignUp).disposed(by: disposeBag)
-            
-            weak var weakSelf: ViewModel! = self
-            input.signInDidTap
-                .withLatestFrom(credentialsObservable)
-                .flatMapLatest { signInService.signIn(with: $0) }
-                .subscribe(
-                    onNext: { _ in print("OK") },
-                    onError: { weakSelf.errorsSubject.onNext($0) }
-                ).disposed(by: disposeBag)
-        }
-        
-        deinit {
-            print(self, #function)
-        }
-        
     }
     
 }

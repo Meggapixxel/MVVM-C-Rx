@@ -7,5 +7,6 @@ target 'MVVM-C+Rx' do
   pod 'Alamofire'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'HeaderFooterRefreshView'
 
 end

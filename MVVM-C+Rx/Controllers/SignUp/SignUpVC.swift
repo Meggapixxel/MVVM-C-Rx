@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SignUpVC: UIViewController, P_ViewController {
+final class SignUpVC: UIViewController, P_ViewController {
     
     static var initiableResource: InitializableSource { .xib }
     
@@ -24,8 +24,18 @@ class SignUpVC: UIViewController, P_ViewController {
     @IBOutlet private weak var passwordCofirmTextField: UITextField!
     @IBOutlet private weak var signUpButton: UIButton!
 
+    deinit {
+        print("ViewController | \(String(describing: type(of: self)))", #function)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("ViewController | \(String(describing: type(of: self)))", #function)
+    }
+    
     // MARK: - P_Bindable
-    var viewModel: ViewModel!
+    var viewModel: SignUpVM!
     
     func bindViewModel() {
         emailTextField.rx.text.orEmpty
@@ -34,6 +44,10 @@ class SignUpVC: UIViewController, P_ViewController {
         
         passwordTextField.rx.text.orEmpty
             .bind(to: viewModel.input.password)
+            .disposed(by: disposeBag)
+        
+        passwordCofirmTextField.rx.text.orEmpty
+            .bind(to: viewModel.input.passwordConfirm)
             .disposed(by: disposeBag)
         
         signUpButton.rx.tap
@@ -62,77 +76,6 @@ extension SignUpVC: P_KeyboardViewController {
     
     func keyboardWillHide(duration: TimeInterval, options: UIView.AnimationOptions) {
         scrollView.contentInset.bottom = 0
-    }
-    
-}
-
-extension SignUpVC {
-    
-    class ViewModel: P_ErrorViewModel {
-        
-        struct Input {
-            let email = BehaviorRelay<String>(value: "")
-            let password = BehaviorRelay<String>(value: "")
-            let passwordConfirm = BehaviorRelay<String>(value: "")
-            let signUpDidTap = PublishSubject<Void>()
-        }
-        struct Output {
-            let signUpEnabled: Driver<Bool>
-            let errors: Driver<Error>
-        }
-        
-        // MARK: - Public properties
-        let input = Input()
-        let output: Output
-        
-        let errorsSubject = PublishSubject<Error>()
-        let disposeBag = DisposeBag()
-        
-        // MARK: - Private properties
-//        private let emailSubject = BehaviorRelay<String>(value: "")
-//        private let passwordSubject = BehaviorRelay<String>(value: "")
-//        private let signInDidTapSubject = PublishSubject<Void>()
-//        private let loginResultSubject = PublishSubject<User>()
-        private var credentialsObservable: Observable<Credentials> {
-            Observable.combineLatest(
-                input.email.asObservable(),
-                input.password.asObservable(),
-                resultSelector: Credentials.init
-            )
-        }
-        
-        // MARK: - Init and deinit
-        init(_ signUpService: P_SignUpService) {
-            
-//            input = Input(
-//                email: emailSubject.asObservable(),
-//                password: passwordSubject.asObservable(),
-//                signInDidTap: signInDidTapSubject.asObserver()
-//            )
-            
-            output = Output(
-                signUpEnabled: Driver.combineLatest(
-                    input.email.asDriver().map { !$0.isEmpty },
-                    input.password.asDriver().map { !$0.isEmpty },
-                    Driver.combineLatest(input.password.asDriver(), input.passwordConfirm.asDriver()) { $0 == $1 }
-                ) { $0 && $1 && $2 },
-                errors: errorsSubject.asDriver(onErrorJustReturn: NSError(domain: "", code: 0, userInfo: nil))
-            )
-            
-            weak var weakSelf: ViewModel! = self
-            input.signUpDidTap
-                .withLatestFrom(credentialsObservable)
-                .flatMapLatest { signUpService.signUp(with: $0) }
-                .subscribe(
-                    onNext: { _ in print("OK") },
-                    onError: { weakSelf.errorsSubject.onNext($0) }
-                ).disposed(by: disposeBag)
-        }
-        
-        deinit {
-            print(self, #function)
-        }
-        
     }
     
 }
